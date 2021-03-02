@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import UserCardList from "./UserCardList";
+import UserProfile from "./UserProfile";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+
 
 class SearchForm extends Component {
     constructor(props) {
@@ -30,21 +33,28 @@ class SearchForm extends Component {
         const { usersArray } = this.state;
         return (
             <>
-                <form onSubmit={this._handleSubmit}>
-                    <label >
-                        <input 
-                            name="username" 
-                            placeholder="Enter a Username" 
-                            value={this.state.username} 
-                            type="text"
-                            onChange={(event) => {
-                                this._onChange(event.target.name, event.target.value);
-                            }}
-                        />
-                    </label>
-                    <button type="button"  >Submit</button>
-                </form>
-                {usersArray.length ? <UserCardList usersArray={usersArray}/> : <p>No users to display...</p>}
+                <Router>
+                    <Route exact path='/'>
+                        <form onSubmit={this._handleSubmit}>
+                            <label >
+                                <input 
+                                    name="username" 
+                                    placeholder="Enter a Username" 
+                                    value={this.state.username} 
+                                    type="text"
+                                    onChange={(event) => {
+                                        this._onChange(event.target.name, event.target.value);
+                                    }}
+                                />
+                            </label>
+                            <button type="submit"  >Submit</button>
+                        </form>
+                        {usersArray.length ? <UserCardList usersArray={usersArray}/> : <p>No users to display...</p>}
+                    </Route>
+                    <Route path='/user/:username'>
+                        <UserProfile />
+                    </Route>
+                </Router>
             </>
         )
     }
