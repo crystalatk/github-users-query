@@ -1,4 +1,4 @@
-
+import { Columns } from 'bloomer';
 import UserCard from "./UserCard";
 
 const UserCardList = (props) => {
@@ -6,11 +6,11 @@ const UserCardList = (props) => {
 
 
     return (
-        <ul>
+        <Columns >
             {usersArray.map((user, index) => {
                 return <UserCard user={user} key={index}/>;
             })}
-        </ul>
+        </Columns >
     )
 }
 

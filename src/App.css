@@ -11,3 +11,14 @@ header {
 li {
   list-style-type: none;
 }
+
+.card-styles {
+  margin: auto;
+  max-width: 25vw;
+}
+
+.center-text {
+  justify-content: center;
+  margin: auto;
+  text-align: center;
+}

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import UserCardList from "./UserCardList";
-import UserProfile from "./UserProfile";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { Field, Label, Input, Button } from 'bloomer';
+import { Container } from "bloomer/lib/layout/Container";
 
 
 class SearchForm extends Component {
@@ -33,28 +33,24 @@ class SearchForm extends Component {
         const { usersArray } = this.state;
         return (
             <>
-                <Router>
-                    <Route exact path='/'>
-                        <form onSubmit={this._handleSubmit}>
-                            <label >
-                                <input 
-                                    name="username" 
-                                    placeholder="Enter a Username" 
-                                    value={this.state.username} 
-                                    type="text"
-                                    onChange={(event) => {
-                                        this._onChange(event.target.name, event.target.value);
-                                    }}
-                                />
-                            </label>
-                            <button type="submit"  >Submit</button>
-                        </form>
-                        {usersArray.length ? <UserCardList usersArray={usersArray}/> : <p>No users to display...</p>}
-                    </Route>
-                    <Route path='/user/:username'>
-                        <UserProfile />
-                    </Route>
-                </Router>
+                <form onSubmit={this._handleSubmit}>
+                <Field isGrouped  style={{ justifyContent: "center", marginTop: 10 }} >
+                    <Label >
+                        <Input 
+                            name="username" 
+                            placeholder="Enter a Username" 
+                            value={this.state.username} 
+                            type="text"
+                            onChange={(event) => {
+                                this._onChange(event.target.name, event.target.value);
+                            }}
+                            style={{ marginRight: 50 }}
+                        />
+                    </Label>
+                    <Button isColor='primary' type="submit" style={{ marginLeft: 12 }} >Submit</Button>
+                </Field>
+                </form>
+                {usersArray.length ? <UserCardList usersArray={usersArray}/> : <p>No users to display...</p>}   
             </>
         )
     }
